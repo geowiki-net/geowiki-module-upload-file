@@ -2,25 +2,31 @@ import Window from 'modulekit-window'
 
 const uploadedDataSources = []
 
+function createItem (app, id) {
+  const item = {
+    id,
+    title: '<Local file>',
+    loader: () => new Promise((resolve, reject) => {
+      showDialog((err, url, name) => {
+        item.title = name + ' (Local)'
+        uploadedDataSources.push(item)
+
+        resolve(url)
+
+        app.refresh()
+      })
+    })
+  }
+
+  return item
+}
+
 module.exports = {
   id: 'upload-file',
   appInit (app) {
     app.on('list-data-sources', promises => {
       promises.push(new Promise(resolve => {
-        const item = {
-          id: '_upload' + uploadedDataSources.length,
-          title: '<Local file>',
-          loader: () => new Promise((resolve, reject) => {
-            showDialog((err, url, name) => {
-              item.title = name + ' (Local)'
-              uploadedDataSources.push(item)
-
-              resolve(url)
-
-              app.refresh()
-            })
-          })
-        }
+        const item = createItem(app, '_upload' + uploadedDataSources.length)
 
         resolve(uploadedDataSources.concat([item]))
       }))
