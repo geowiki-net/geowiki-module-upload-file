@@ -31,6 +31,12 @@ module.exports = {
         resolve(uploadedDataSources.concat([item]))
       }))
     })
+
+    app.on('get-data-source', (id, promises) => {
+      if (id.match(/^_upload/)) {
+        promises.push(createItem(app, id))
+      }
+    })
   }
 }
 
