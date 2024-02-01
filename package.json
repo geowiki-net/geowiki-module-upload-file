@@ -1,0 +1,20 @@
+{
+  "name": "geowiki-module-upload-file",
+  "version": "0.0.0",
+  "description": "Allow the upload of Styles and Data Sources",
+  "main": "src/uploadFile.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geowiki-net/geowiki-module-upload-file.git"
+  },
+  "author": "Stephan Bösch-Plepelits <skunk@xover.mud.at>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geowiki-net/geowiki-module-upload-file/issues"
+  },
+  "homepage": "https://github.com/geowiki-net/geowiki-module-upload-file#readme",
+  "dependencies": {
+    "modulekit-window": "github:plepe/modulekit-window"
+  }
+}
