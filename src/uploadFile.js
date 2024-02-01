@@ -1,3 +1,5 @@
+import Window from 'modulekit-window'
+
 module.exports = {
   id: 'upload-file',
   appInit (app) {
@@ -7,13 +9,37 @@ module.exports = {
           id: 'upload1',
           title: '<Local file>',
           loader: () => new Promise((resolve, reject) => {
-            item.title = 'Local file #1'
-            resolve('data/test.osm')
+            showDialog((err, url, name) => {
+              item.title = name + ' (Local)'
+              resolve(url)
+            })
           })
         }
 
         resolve(item)
       }))
     })
+  }
+}
+
+function showDialog (callback) {
+  const win = new Window({
+    title: 'Select file'
+  })
+
+  const input = document.createElement('input')
+  input.type = 'file'
+  win.content.appendChild(input)
+  win.show()
+
+  input.onchange = () => {
+    let reader = new FileReader()
+    reader.onload = (e) => {
+      const url = e.target.result
+      win.close()
+      callback(null, url, input.files[0].name)
+    }
+
+    reader.readAsDataURL(input.files[0])
   }
 }
