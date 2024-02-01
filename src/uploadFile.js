@@ -51,7 +51,7 @@ function showDialog (callback) {
   win.show()
 
   input.onchange = () => {
-    let reader = new FileReader()
+    const reader = new FileReader()
     reader.onload = (e) => {
       const url = e.target.result
       win.close()
