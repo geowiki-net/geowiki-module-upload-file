@@ -12,6 +12,8 @@ module.exports = {
             showDialog((err, url, name) => {
               item.title = name + ' (Local)'
               resolve(url)
+
+              app.refresh()
             })
           })
         }
